@@ -1,6 +1,7 @@
 # Naive Bayes Classifier
 
-What is Naive Bayes algorithm: 
+__What is Naive Bayes algorithm?__
+
 It is a supervised learning method based on __Bayes theorem__ which assumes that all features (inputs) that we use to predict the target value are __mutual independent__.
 
 This is a strong assumption that is not always applicable in real life dataset ,but we assume it because __it make our calculations way much simpler yet efficient__.
@@ -12,6 +13,61 @@ __P(class|data) = (P(data|class) * P(class)) / P(data)__
 where P(class|data) is the probability of a class giving a provided data.
 
 Naive Bayes is a classification algorithm used for binary and multiclass classification problems
+
+## Example (spam filtter):
+
+magine that you are receiving a lot of emails on your Gmail and you need to filter unwanted messages (spam) that where __Naive Bayes__ will be a perfect solution for the kind of problems (classification problems).
+
+or example, you have 20 emails and you want to filter spam depending on the data you have which we are going to call training data next:-
+You have 12 emails in your inbox and there are 8 regular emails and 4 are spam and the data besides them refers to the number of occurrences of each word.
+
+![emails](assets/emails.png)
+
+- from the figure above, if we wanted to calculate the probability of seeing the word "Dear" in the regular emails we use :-
+P("Dear"|regular) = total number of occurences of word "Dear" in regular emails / total number of words in regular emails = 8 / 14
+
+- P("Friend"|regular) = 5 / 14
+
+- P("Money"|regular) = 1 / 14
+
+- P("Dear"|regular) = 8 / 14
+
+- to calculate the probability of seeing a regular email regardless of what it says = P(regular) = number of regular emails / total number of emails = 8 / 12 
+
+### and for spam
+
+
+with the same steps
+
+- P("Friend"|spam) = 1 / 7
+
+- P("Money"|spam) = 4 / 7
+
+- P("Dear"|regular) = 2 / 7
+
+- P(spam) = 4 / 12 
+
+__then__
+
+we can tell if the next email gonna be spam or not based on our calculations (of course it wont be accurate becuase the dataset is so small) by the next steps.
+
+
+if we have an email that have "Dear Friend" in its body to know its class we study its likelihood of each class we have:-
+
+### for regular emails
+
+P(regular|"Dear Friend") = P("Dear"|regular) * P("Friend"|regular) * P(regular) = 4/7 * 5/14 * 2/3 = .1 (apprx) => 1
+
+__Note__:- if you looked closely you find the previous equation is similar to P(A|B) = P(B|A) * P(A) / P(B) But removed the Denominator since we are interested in likelihood so we want to maximize the value closest class
+
+
+### for SPAM
+
+P(spam|"Dear Friend") = P("Dear"|spam) * P("Friend"|spam) * P(spam) = 2/7 * 1/7 * 1/3 = .01 (apprx) => 2
+
+
+
+obviously, the value in eqn (1) is >> than eqn (2) so, we can conclude that the email is not SPAM. and this is how simply the algorthim works next we use it to solve our classification problem on heart disease dataset but we wil use a slightly different approach calles Gaussian Naive Bays 
 
 # Heart Disease Dataset
 
